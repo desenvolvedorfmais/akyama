@@ -1,0 +1,26 @@
+D:\data\www\private\Fazendo Mais\Arquivos\Biometria\Akiama\FDx SDK Pro for Windows v3.85_J1.12\FDx SDK Pro for Windows v3.85_J1.12\FDx SDK Pro for Windows 3.85\DotNET\Samples\C#\Matching\bin\x86\Debug\Matching_cs.exe.config
+D:\data\www\private\Fazendo Mais\Arquivos\Biometria\Akiama\FDx SDK Pro for Windows v3.85_J1.12\FDx SDK Pro for Windows v3.85_J1.12\FDx SDK Pro for Windows 3.85\DotNET\Samples\C#\Matching\bin\x86\Debug\Matching_cs.exe
+D:\data\www\private\Fazendo Mais\Arquivos\Biometria\Akiama\FDx SDK Pro for Windows v3.85_J1.12\FDx SDK Pro for Windows v3.85_J1.12\FDx SDK Pro for Windows 3.85\DotNET\Samples\C#\Matching\bin\x86\Debug\Matching_cs.pdb
+D:\data\www\private\Fazendo Mais\Arquivos\Biometria\Akiama\FDx SDK Pro for Windows v3.85_J1.12\FDx SDK Pro for Windows v3.85_J1.12\FDx SDK Pro for Windows 3.85\DotNET\Samples\C#\Matching\bin\x86\Debug\SecuGen.FDxSDKPro.Windows.dll
+D:\data\www\private\Fazendo Mais\Arquivos\Biometria\Akiama\FDx SDK Pro for Windows v3.85_J1.12\FDx SDK Pro for Windows v3.85_J1.12\FDx SDK Pro for Windows 3.85\DotNET\Samples\C#\Matching\obj\x86\Debug\matching_cs2012.csprojAssemblyReference.cache
+D:\data\www\private\Fazendo Mais\Arquivos\Biometria\Akiama\FDx SDK Pro for Windows v3.85_J1.12\FDx SDK Pro for Windows v3.85_J1.12\FDx SDK Pro for Windows 3.85\DotNET\Samples\C#\Matching\obj\x86\Debug\sgdm.MainForm.resources
+D:\data\www\private\Fazendo Mais\Arquivos\Biometria\Akiama\FDx SDK Pro for Windows v3.85_J1.12\FDx SDK Pro for Windows v3.85_J1.12\FDx SDK Pro for Windows 3.85\DotNET\Samples\C#\Matching\obj\x86\Debug\matching_cs2012.csproj.GenerateResource.cache
+D:\data\www\private\Fazendo Mais\Arquivos\Biometria\Akiama\FDx SDK Pro for Windows v3.85_J1.12\FDx SDK Pro for Windows v3.85_J1.12\FDx SDK Pro for Windows 3.85\DotNET\Samples\C#\Matching\obj\x86\Debug\matching_cs2012.csproj.CoreCompileInputs.cache
+D:\data\www\private\Fazendo Mais\Arquivos\Biometria\Akiama\FDx SDK Pro for Windows v3.85_J1.12\FDx SDK Pro for Windows v3.85_J1.12\FDx SDK Pro for Windows 3.85\DotNET\Samples\C#\Matching\obj\x86\Debug\matching_cs2012.csproj.CopyComplete
+D:\data\www\private\Fazendo Mais\Arquivos\Biometria\Akiama\FDx SDK Pro for Windows v3.85_J1.12\FDx SDK Pro for Windows v3.85_J1.12\FDx SDK Pro for Windows 3.85\DotNET\Samples\C#\Matching\obj\x86\Debug\Matching_cs.exe
+D:\data\www\private\Fazendo Mais\Arquivos\Biometria\Akiama\FDx SDK Pro for Windows v3.85_J1.12\FDx SDK Pro for Windows v3.85_J1.12\FDx SDK Pro for Windows 3.85\DotNET\Samples\C#\Matching\obj\x86\Debug\Matching_cs.pdb
+D:\data\www\private\Fazendo Mais\private\web-integration\C#\Matching\bin\x86\Debug\Newtonsoft.Json.dll
+D:\data\www\private\Fazendo Mais\private\web-integration\C#\Matching\bin\x86\Debug\Matching_cs.exe.config
+D:\data\www\private\Fazendo Mais\private\web-integration\C#\Matching\bin\x86\Debug\Matching_cs.exe
+D:\data\www\private\Fazendo Mais\private\web-integration\C#\Matching\bin\x86\Debug\Matching_cs.pdb
+D:\data\www\private\Fazendo Mais\private\web-integration\C#\Matching\bin\x86\Debug\EntityFramework.dll
+D:\data\www\private\Fazendo Mais\private\web-integration\C#\Matching\bin\x86\Debug\EntityFramework.SqlServer.dll
+D:\data\www\private\Fazendo Mais\private\web-integration\C#\Matching\bin\x86\Debug\EntityFramework.xml
+D:\data\www\private\Fazendo Mais\private\web-integration\C#\Matching\bin\x86\Debug\EntityFramework.SqlServer.xml
+D:\data\www\private\Fazendo Mais\private\web-integration\C#\Matching\bin\x86\Debug\Newtonsoft.Json.xml
+D:\data\www\private\Fazendo Mais\private\web-integration\C#\Matching\obj\x86\Debug\Matching_cs.MainForm.resources
+D:\data\www\private\Fazendo Mais\private\web-integration\C#\Matching\obj\x86\Debug\matching_cs2012.csproj.GenerateResource.cache
+D:\data\www\private\Fazendo Mais\private\web-integration\C#\Matching\obj\x86\Debug\matching_cs2012.csproj.CoreCompileInputs.cache
+D:\data\www\private\Fazendo Mais\private\web-integration\C#\Matching\obj\x86\Debug\matching_cs2012.csproj.CopyComplete
+D:\data\www\private\Fazendo Mais\private\web-integration\C#\Matching\obj\x86\Debug\Matching_cs.exe
+D:\data\www\private\Fazendo Mais\private\web-integration\C#\Matching\obj\x86\Debug\Matching_cs.pdb

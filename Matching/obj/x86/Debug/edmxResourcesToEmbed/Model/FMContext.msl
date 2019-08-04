@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="dbEventos_FMModelStoreContainer" CdmEntityContainer="FMContext">
+    <EntitySetMapping Name="tbBiometria">
+      <EntityTypeMapping TypeName="dbEventos_FMModel.tbBiometria">
+        <MappingFragment StoreEntitySet="tbBiometria">
+          <ScalarProperty Name="templateImage" ColumnName="templateImage" />
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="biometriaBytes" ColumnName="biometriaBytes" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
