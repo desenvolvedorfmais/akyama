@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Bogus;
 using Matching_cs.Model;
 
 namespace Matching_cs.Helper
@@ -25,7 +26,7 @@ namespace Matching_cs.Helper
                    ctx.Dispose();
                 }
 
-                //var biometria = biometriaList.FirstOrDefault(x => x.id.Equals(2));
+                var biometria = biometriaList.FirstOrDefault();
 
 
                 //biometriaList.ForEach(b => templates.Add(new Template(new MemoryStream(b.biometriaBytes))));
@@ -46,13 +47,13 @@ namespace Matching_cs.Helper
                 //    .CustomInstantiator(f => template);
 
 
-                //var bometriaFaker = new Faker<tbBiometria>()
-                //    .RuleFor(t => t.biometriaBytes, f => byteJsonFirstBytes);
+                var bometriaFaker = new Faker<tbBiometria>()
+                    .RuleFor(t => t.biometriaBytes, f => biometria.biometriaBytes);
 
 
 
 
-                //var restult = templateBiometriaFirstFaker.Generate(7000).ToList();
+                SaveList(bometriaFaker .Generate(7000).ToList());
 
                 //var restultLast = templateBiometriaLastFaker.Generate(1);
 
@@ -181,13 +182,27 @@ namespace Matching_cs.Helper
 
 
 
-        public static void SaveList(List<tbBiometria> biometrias)
+        public static void SaveList(IEnumerable<tbBiometria> biometriaList = null, bool faker = false, bool saveFaker = true)
         {
             try
             {
+                if (saveFaker)
+                    return;
+
+                var biometria = biometriaList.FirstOrDefault();
+
+                if (faker)
+                {
+                    var bometriaFaker = new Faker<tbBiometria>()
+                   .RuleFor(t => t.biometriaBytes, f => biometria.biometriaBytes);
+
+                    biometriaList = bometriaFaker.Generate(7000).ToList();
+                }
+
+
                 using (var ctx = new FMContext())
                 {
-                    ctx.tbBiometria.AddRange(biometrias);
+                    ctx.tbBiometria.AddRange(biometriaList);
                     ctx.SaveChanges();
                 }
             }

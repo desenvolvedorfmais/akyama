@@ -24,3 +24,22 @@ D:\data\www\private\Fazendo Mais\private\web-integration\C#\Matching\obj\x86\Deb
 D:\data\www\private\Fazendo Mais\private\web-integration\C#\Matching\obj\x86\Debug\matching_cs2012.csproj.CopyComplete
 D:\data\www\private\Fazendo Mais\private\web-integration\C#\Matching\obj\x86\Debug\Matching_cs.exe
 D:\data\www\private\Fazendo Mais\private\web-integration\C#\Matching\obj\x86\Debug\Matching_cs.pdb
+D:\App\projects\private\fazendomais\private\web-dev\fm-third-dev\akiama\Matching\bin\x86\Debug\Matching_cs.exe.config
+D:\App\projects\private\fazendomais\private\web-dev\fm-third-dev\akiama\Matching\bin\x86\Debug\Matching_cs.exe
+D:\App\projects\private\fazendomais\private\web-dev\fm-third-dev\akiama\Matching\bin\x86\Debug\Matching_cs.pdb
+D:\App\projects\private\fazendomais\private\web-dev\fm-third-dev\akiama\Matching\bin\x86\Debug\Bogus.dll
+D:\App\projects\private\fazendomais\private\web-dev\fm-third-dev\akiama\Matching\bin\x86\Debug\EntityFramework.dll
+D:\App\projects\private\fazendomais\private\web-dev\fm-third-dev\akiama\Matching\bin\x86\Debug\EntityFramework.SqlServer.dll
+D:\App\projects\private\fazendomais\private\web-dev\fm-third-dev\akiama\Matching\bin\x86\Debug\Newtonsoft.Json.dll
+D:\App\projects\private\fazendomais\private\web-dev\fm-third-dev\akiama\Matching\bin\x86\Debug\Bogus.pdb
+D:\App\projects\private\fazendomais\private\web-dev\fm-third-dev\akiama\Matching\bin\x86\Debug\Bogus.xml
+D:\App\projects\private\fazendomais\private\web-dev\fm-third-dev\akiama\Matching\bin\x86\Debug\EntityFramework.xml
+D:\App\projects\private\fazendomais\private\web-dev\fm-third-dev\akiama\Matching\bin\x86\Debug\EntityFramework.SqlServer.xml
+D:\App\projects\private\fazendomais\private\web-dev\fm-third-dev\akiama\Matching\bin\x86\Debug\Newtonsoft.Json.xml
+D:\App\projects\private\fazendomais\private\web-dev\fm-third-dev\akiama\Matching\obj\x86\Debug\Matching_cs.MainForm.resources
+D:\App\projects\private\fazendomais\private\web-dev\fm-third-dev\akiama\Matching\obj\x86\Debug\matching_cs2012.csproj.GenerateResource.cache
+D:\App\projects\private\fazendomais\private\web-dev\fm-third-dev\akiama\Matching\obj\x86\Debug\matching_cs2012.csproj.CoreCompileInputs.cache
+D:\App\projects\private\fazendomais\private\web-dev\fm-third-dev\akiama\Matching\obj\x86\Debug\matching_cs2012.csproj.CopyComplete
+D:\App\projects\private\fazendomais\private\web-dev\fm-third-dev\akiama\Matching\obj\x86\Debug\Matching_cs.exe
+D:\App\projects\private\fazendomais\private\web-dev\fm-third-dev\akiama\Matching\obj\x86\Debug\Matching_cs.pdb
+D:\App\projects\private\fazendomais\private\web-dev\fm-third-dev\akiama\Matching\obj\x86\Debug\matching_cs2012.csprojAssemblyReference.cache

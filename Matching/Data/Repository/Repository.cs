@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using Matching_cs.Domain.Interface.Repository;
 using Matching_cs.Model;
 
-namespace Matching_cs.Repository
+namespace Matching_cs.Data.Repository
 {
     public class Repository<T> : IRepository<T> where T : class
     {
@@ -40,6 +41,19 @@ namespace Matching_cs.Repository
             throw new NotImplementedException();
         }
 
-       
+
+        public void Dispose()
+
+        {
+
+            if (_dbContext != null)
+            {
+                _dbContext.Dispose();
+            }
+
+            GC.SuppressFinalize(this);
+
+        }
+
     }
 }

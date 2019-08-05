@@ -7,9 +7,10 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Matching_cs.Data.Repository;
+using Matching_cs.Domain.Service;
 using Matching_cs.Helper;
 using Matching_cs.Model;
-using Matching_cs.Repository;
 using SecuGen.FDxSDKPro.Windows;
 
 namespace Matching_cs
@@ -21,8 +22,7 @@ namespace Matching_cs
     {
         #region Propretiers
 
-        private IEnumerable<tbBiometria> biometriaList;
-        private BiometriaRepository _biometriaRepository;
+        private List<tbBiometria> biometriaList;
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -31,6 +31,7 @@ namespace Matching_cs
         private bool m_LedOn = false;
         private int m_ImageWidth;
         private int m_ImageHeight;
+        private bool matched1;
         private byte[] m_RegMin1;
         private byte[] m_RegMin2;
         private byte[] m_VrfMin;
@@ -106,12 +107,15 @@ namespace Matching_cs
         private int img2_qlty;
         private int img1_qlty;
         private int countSkip;
-        private int countTake;
+        private int countTake = 500;
         private int iError;
         private CancellationTokenSource cancellationTokenSource;
 
         #endregion
-        
+
+        private BiometriaService _biometriaService;
+        private Stopwatch sw;
+
         public MainForm()
         {
             InitializeComponent();
@@ -210,16 +214,16 @@ namespace Matching_cs
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.GroupBoxBrightness.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize) (this.BrightnessUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BrightnessUpDown)).BeginInit();
             this.groupBox4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize) (this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabPage3.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize) (this.pictureBoxV1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxV1)).BeginInit();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize) (this.pictureBoxR2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize) (this.pictureBoxR1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxR2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxR1)).BeginInit();
             this.tabPage1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBoxUsbDevs.SuspendLayout();
@@ -962,17 +966,17 @@ namespace Matching_cs
             this.tabControl1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.GroupBoxBrightness.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize) (this.BrightnessUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BrightnessUpDown)).EndInit();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize) (this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.groupBox6.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize) (this.pictureBoxV1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxV1)).EndInit();
             this.groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize) (this.pictureBoxR2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize) (this.pictureBoxR1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxR2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxR1)).EndInit();
             this.tabPage1.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
@@ -1013,8 +1017,12 @@ namespace Matching_cs
             m_FPM = new SGFingerPrintManager();
             EnumerateBtn_Click(sender, e);
 
-            _biometriaRepository = new BiometriaRepository(new FMContext());
-        var list =     _biometriaRepository.GetAll();
+            var fmContext = new FMContext();
+            _biometriaService = new BiometriaService(new BiometriaRepository(fmContext));
+            biometriaList = _biometriaService.GetAll().ToList();
+            if (biometriaList.Count() > 0)
+                FakerHelper.SaveList(biometriaList, false);
+
 
             Debug.WriteLine($"Count: {biometriaList.Count()}");
         }
@@ -1074,7 +1082,7 @@ namespace Matching_cs
                 // Order of search: Hamster IV(HFDU04) -> Plus(HFDU03) -> III (HFDU02)
                 device_name = SGFPMDeviceName.DEV_AUTO;
 
-                device_id = (int) (SGFPMPortAddr.USB_AUTO_DETECT);
+                device_id = (int)(SGFPMPortAddr.USB_AUTO_DETECT);
             }
             else
             {
@@ -1084,13 +1092,13 @@ namespace Matching_cs
 
             int iError = OpenDevice(device_name, device_id);
 
-            if (iError == (int) SGFPMError.ERROR_NONE)
+            if (iError == (int)SGFPMError.ERROR_NONE)
             {
                 GroupBoxBrightness.Enabled = true;
                 ConfigBtn.Enabled = true;
             }
 
-            
+
             //m_FPM.EnableCheckOfFingerLiveness(true);
             //m_FPM.SetAutoOnIRLedTouchOn(true, true);
         }
@@ -1105,7 +1113,7 @@ namespace Matching_cs
 
             int iError = OpenDevice(device_name, port_no);
 
-            if (iError == (int) SGFPMError.ERROR_NONE)
+            if (iError == (int)SGFPMError.ERROR_NONE)
             {
                 // These are not supported for SDA device
                 GroupBoxBrightness.Enabled = false;
@@ -1117,11 +1125,12 @@ namespace Matching_cs
 
         private int OpenDevice(SGFPMDeviceName device_name, int device_id)
         {
+            CloseDevice();
             int iError = m_FPM.Init(device_name);
             iError = m_FPM.OpenDevice(device_id);
 
             CheckBoxAutoOn.Enabled = false;
-            if (iError == (int) SGFPMError.ERROR_NONE)
+            if (iError == (int)SGFPMError.ERROR_NONE)
             {
                 //GetBtn_Click(sender, e);
                 GetBtn_Click(null, null);
@@ -1132,11 +1141,14 @@ namespace Matching_cs
                 if (device_name >= SGFPMDeviceName.DEV_FDU03)
                 {
                     CheckBoxAutoOn.Enabled = true;
-                    m_FPM.EnableAutoOnEvent(true, (int) this.Handle);
+                    m_FPM.EnableAutoOnEvent(true, (int)this.Handle);
                 }
             }
             else
+            {
                 DisplayError("OpenDevice()", iError);
+            }
+               
 
             return iError;
         }
@@ -1158,7 +1170,7 @@ namespace Matching_cs
         /// Configure()
         private void ConfigBtn_Click(object sender, System.EventArgs e)
         {
-            m_FPM.Configure((int) this.Handle);
+            m_FPM.Configure((int)this.Handle);
         }
 
         ///////////////////////
@@ -1176,7 +1188,7 @@ namespace Matching_cs
 
             iError = m_FPM.GetImage(fp_image);
 
-            if (iError == (int) SGFPMError.ERROR_NONE)
+            if (iError == (int)SGFPMError.ERROR_NONE)
             {
                 elap_time = Environment.TickCount - elap_time;
                 DrawImage(fp_image, pictureBox1);
@@ -1205,7 +1217,7 @@ namespace Matching_cs
             quality = Convert.ToInt32(textImgQuality.Text);
             fp_image = new byte[m_ImageWidth * m_ImageHeight];
             elap_time = Environment.TickCount;
-            
+
             iError = m_FPM.GetImageEx(fp_image, timeout, this.pictureBox1.Handle.ToInt32(), quality);
 
             if (iError == 0)
@@ -1238,12 +1250,12 @@ namespace Matching_cs
             m_FPM.GetImageQuality(m_ImageWidth, m_ImageHeight, fp_image, ref img1_qlty);
             progressBar_R1.Value = img1_qlty;
 
-            if (iError == (int) SGFPMError.ERROR_NONE)
+            if (iError == (int)SGFPMError.ERROR_NONE)
             {
                 DrawImage(fp_image, pictureBoxR1);
                 iError = m_FPM.CreateTemplate(fp_image, m_RegMin1);
 
-                if (iError == (int) SGFPMError.ERROR_NONE)
+                if (iError == (int)SGFPMError.ERROR_NONE)
                     StatusBar.Text = "First image is captured";
                 else
                     DisplayError("CreateTemplate()", iError);
@@ -1271,12 +1283,12 @@ namespace Matching_cs
             m_FPM.GetImageQuality(m_ImageWidth, m_ImageHeight, fp_image, ref img2_qlty);
             progressBar_R2.Value = img2_qlty;
 
-            if (iError == (int) SGFPMError.ERROR_NONE)
+            if (iError == (int)SGFPMError.ERROR_NONE)
             {
                 DrawImage(fp_image, pictureBoxR2);
                 iError = m_FPM.CreateTemplate(fp_image, m_RegMin2);
 
-                if (iError == (int) SGFPMError.ERROR_NONE)
+                if (iError == (int)SGFPMError.ERROR_NONE)
                     StatusBar.Text = "Second image is captured";
                 else
                     DisplayError("CreateTemplate()", iError);
@@ -1307,12 +1319,12 @@ namespace Matching_cs
             m_FPM.GetImageQuality(m_ImageWidth, m_ImageHeight, fp_image, ref img_qlty);
             progressBar_V1.Value = img_qlty;
 
-            if (iError == (int) SGFPMError.ERROR_NONE)
+            if (iError == (int)SGFPMError.ERROR_NONE)
             {
                 DrawImage(fp_image, pictureBoxV1);
                 iError = m_FPM.CreateTemplate(null, fp_image, m_VrfMin);
 
-                if (iError == (int) SGFPMError.ERROR_NONE)
+                if (iError == (int)SGFPMError.ERROR_NONE)
                     StatusBar.Text = "Image for verification is captured";
                 else
                     DisplayError("CreateTemplate()", iError);
@@ -1333,7 +1345,7 @@ namespace Matching_cs
             int match_score = 0;
             SGFPMSecurityLevel secu_level; //
 
-            secu_level = (SGFPMSecurityLevel) comboBoxSecuLevel_R.SelectedIndex;
+            secu_level = (SGFPMSecurityLevel)comboBoxSecuLevel_R.SelectedIndex;
 
 
             iError = m_FPM.MatchTemplate(m_RegMin1, m_RegMin2, secu_level, ref matched);
@@ -1349,7 +1361,7 @@ namespace Matching_cs
                 else
                     biometriaRegByte = m_RegMin2;
 
-                if (iError == (int) SGFPMError.ERROR_NONE)
+                if (iError == (int)SGFPMError.ERROR_NONE)
                 {
                     if (matched)
                     {
@@ -1372,17 +1384,65 @@ namespace Matching_cs
         private void BtnVerify_Click(object sender, System.EventArgs e)
         {
             BtnCapture3_Click(null, null);
+            var fmContext = new FMContext();
+            //_biometriaService = new BiometriaService(new BiometriaRepository(fmContext));
 
             iError = 0;
             cancellationTokenSource = new CancellationTokenSource();
             bool matched2 = false;
             SGFPMSecurityLevel secu_level;
 
-            secu_level = (SGFPMSecurityLevel) comboBoxSecuLevel_V.SelectedIndex;
+            secu_level = (SGFPMSecurityLevel)comboBoxSecuLevel_V.SelectedIndex;
+            matched1 = false;
+            m_RegMin1 = null;
+            countSkip = 0;
+            try
+            {
+                 sw = Stopwatch.StartNew();
+                var tasksList = new Task[11];
+                for (int i = 0; i < 11; i++)
+                {
+                    if (i == 0)
+                        countSkip = 0;
+                    else;
+                    countSkip += 500;
 
-            iError = CreateTaskList(secu_level, cancellationTokenSource);
+                    if (cancellationTokenSource.IsCancellationRequested)
+                        break;
+                    //var listBiometria = templates.Skip(countSkip).Take(countTake).ToList();
+                    var listBiometria = biometriaList.Skip(countSkip).Take(countTake);
+                    if (listBiometria?.Count() > 0)
+                    {
+                        tasksList[i] = new Task(() =>
+                            SearchTemplatesAsync(i, biometriaList, secu_level, cancellationTokenSource)
+                        );
+                    }
 
-            cancellationTokenSource.Cancel();
+
+                }
+
+
+                tasksList = tasksList.Where(t => t != null).ToArray();
+
+                Parallel.ForEach(tasksList, (t) => { t.Start(); });
+                Task.WaitAll(tasksList);
+
+                
+                cancellationTokenSource.Cancel();
+            }
+            catch (AggregateException ex)
+            {
+                foreach (var inner in ex.InnerExceptions)
+                {
+                    Debug.WriteLine($"Caught AggregateException in Main at {DateTime.UtcNow}: " + inner.Message);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Caught Exception in Main at {DateTime.UtcNow}: " + ex.Message);
+            }
+
+            
         }
 
         private int CreateTaskList(SGFPMSecurityLevel secu_level, CancellationTokenSource cancellationTokenSource)
@@ -1392,20 +1452,20 @@ namespace Matching_cs
             {
                 var sw = Stopwatch.StartNew();
                 var tasksList = new Task[11];
-                for (int i = 0; i < 1; i++)
+                for (int i = 0; i < 11; i++)
                 {
                     if (i == 0)
                         countSkip = 0;
                     else;
                     countSkip += 500;
-                   
+
 
                     //var listBiometria = templates.Skip(countSkip).Take(countTake).ToList();
-                    var listBiometria = FakerHelper.FacktoryBiometriaList(biometriaList, countSkip, countTake, true);
+                    var listBiometria = biometriaList.Skip(countSkip).Take(countTake);
                     if (listBiometria?.Count() > 0)
                     {
                         tasksList[i] = new Task(() =>
-                            SearchTemplatesAsync(i, listBiometria, secu_level, cancellationTokenSource)
+                            SearchTemplatesAsync(i, biometriaList, secu_level, cancellationTokenSource)
                         );
                     }
 
@@ -1437,21 +1497,19 @@ namespace Matching_cs
             return 0;
         }
 
-        private void SearchTemplatesAsync(int idTask, IEnumerable<tbBiometria> listBiometria, SGFPMSecurityLevel secuLevel,
+        private void SearchTemplatesAsync(int idTask, List<tbBiometria> listBiometria, SGFPMSecurityLevel secuLevel,
               CancellationTokenSource cancellationToken)
         {
-            bool matched1 = false;
-            m_RegMin1 = null;
+
             Parallel.ForEach(listBiometria, i =>
             {
-                if (cancellationToken.IsCancellationRequested)
-                {
-                    return;
-                }
 
+                if (cancellationToken.IsCancellationRequested)
+                    return;
                 m_RegMin1 = i.biometriaBytes;
 
-                iError = m_FPM.MatchTemplate(m_RegMin1, m_VrfMin, secuLevel, ref matched1);
+
+                 iError = m_FPM.MatchTemplate(m_RegMin1, m_VrfMin, secuLevel, ref matched1);
 
 
                 //iError = m_FPM.MatchTemplate(m_RegMin2, m_VrfMin, secu_level, ref matched2);
@@ -1462,16 +1520,14 @@ namespace Matching_cs
                     {
                         Debug.WriteLine($"Achou a biometria na task: {idTask}");
                         Debug.WriteLine($"Ready ID Biometria: {i.id}");
-                        StatusBar.Text = "Verification Success";
+                        //StatusBar.Text = "Verification Success";
+                        Debug.WriteLine(" Finalizado em: " + sw.ElapsedMilliseconds);
                         cancellationToken.Cancel();
                     }
 
-                    else
-                        StatusBar.Text = "Verification Failed";
+                   
                 }
-                else
-                    DisplayError("MatchTemplate()", iError);
-
+              
             });
         }
 
@@ -1483,7 +1539,7 @@ namespace Matching_cs
             SGFPMDeviceInfoParam pInfo = new SGFPMDeviceInfoParam();
             int iError = m_FPM.GetDeviceInfo(pInfo);
 
-            if (iError == (int) SGFPMError.ERROR_NONE)
+            if (iError == (int)SGFPMError.ERROR_NONE)
             {
                 m_ImageWidth = pInfo.ImageWidth;
                 m_ImageHeight = pInfo.ImageHeight;
@@ -1511,9 +1567,9 @@ namespace Matching_cs
             int iError;
             int brightness;
 
-            brightness = (int) BrightnessUpDown.Value;
+            brightness = (int)BrightnessUpDown.Value;
             iError = m_FPM.SetBrightness(brightness);
-            if (iError == (int) SGFPMError.ERROR_NONE)
+            if (iError == (int)SGFPMError.ERROR_NONE)
             {
                 StatusBar.Text = "SetBrightness success";
                 GetBtn_Click(sender, e);
@@ -1527,7 +1583,7 @@ namespace Matching_cs
         private void CheckBoxAutoOn_CheckedChanged(object sender, System.EventArgs e)
         {
             if (CheckBoxAutoOn.Checked)
-                m_FPM.EnableAutoOnEvent(true, (int) this.Handle);
+                m_FPM.EnableAutoOnEvent(true, (int)this.Handle);
             else
                 m_FPM.EnableAutoOnEvent(false, 0);
         }
@@ -1535,11 +1591,11 @@ namespace Matching_cs
         ///////////////////////
         protected override void WndProc(ref Message message)
         {
-            if (message.Msg == (int) SGFPMMessages.DEV_AUTOONEVENT)
+            if (message.Msg == (int)SGFPMMessages.DEV_AUTOONEVENT)
             {
-                if (message.WParam.ToInt32() == (int) SGFPMAutoOnEvent.FINGER_ON)
+                if (message.WParam.ToInt32() == (int)SGFPMAutoOnEvent.FINGER_ON)
                     StatusBar.Text = "Device Message: Finger On";
-                else if (message.WParam.ToInt32() == (int) SGFPMAutoOnEvent.FINGER_OFF)
+                else if (message.WParam.ToInt32() == (int)SGFPMAutoOnEvent.FINGER_OFF)
                     StatusBar.Text = "Device Message: Finger Off";
             }
 
@@ -1551,13 +1607,13 @@ namespace Matching_cs
         {
             int colorval;
             Bitmap bmp = new Bitmap(m_ImageWidth, m_ImageHeight);
-            picBox.Image = (Image) bmp;
+            picBox.Image = (Image)bmp;
 
             for (int i = 0; i < bmp.Width; i++)
             {
                 for (int j = 0; j < bmp.Height; j++)
                 {
-                    colorval = (int) imgData[(j * m_ImageWidth) + i];
+                    colorval = (int)imgData[(j * m_ImageWidth) + i];
                     bmp.SetPixel(i, j, Color.FromArgb(colorval, colorval, colorval));
                 }
             }
