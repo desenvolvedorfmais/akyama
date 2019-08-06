@@ -8,10 +8,10 @@ namespace Matching_cs.Helper
 {
     public static class FakerHelper
     {
-        private static tbBiometria biometriaFirst;
-        private static IQueryable<tbBiometria> biometriaList;
+        private static tbBiometria_Akiama biometriaFirst;
+        private static IQueryable<tbBiometria_Akiama> biometriaList;
 
-        public static IEnumerable<tbBiometria> ByteBiometriListFaker()
+        public static IEnumerable<tbBiometria_Akiama> ByteBiometriListFaker()
         {
 
             byte[] byteJsonFirstBytes, lastBytes = new byte[] { };
@@ -22,7 +22,7 @@ namespace Matching_cs.Helper
             {
                 using (var ctx = new FMContext())
                 {
-                   biometriaList =  ctx.tbBiometria;
+                   biometriaList =  ctx.tbBiometria_Akiama;
                    ctx.Dispose();
                 }
 
@@ -47,7 +47,7 @@ namespace Matching_cs.Helper
                 //    .CustomInstantiator(f => template);
 
 
-                var bometriaFaker = new Faker<tbBiometria>()
+                var bometriaFaker = new Faker<tbBiometria_Akiama>()
                     .RuleFor(t => t.biometriaBytes, f => biometria.biometriaBytes);
 
 
@@ -71,12 +71,12 @@ namespace Matching_cs.Helper
         }
 
 
-        public static List<tbBiometria> TemplateBimetriaFaker(int countSkip = 0, int countTake = 0, bool isSkip = false)
+        public static List<tbBiometria_Akiama> TemplateBimetriaFaker(int countSkip = 0, int countTake = 0, bool isSkip = false)
         {
 
             byte[] byteJsonFirstBytes, lastBytes = new byte[] { };
 
-            var biometriaList = new List<tbBiometria>();
+            var biometriaList = new List<tbBiometria_Akiama>();
            
             try
             {
@@ -84,16 +84,16 @@ namespace Matching_cs.Helper
                 {
 
                     if(isSkip)
-                    biometriaList = ctx.tbBiometria.Skip(countSkip).Take(countTake).ToList();
+                    biometriaList = ctx.tbBiometria_Akiama.Skip(countSkip).Take(countTake).ToList();
                     else
-                        biometriaList = ctx.tbBiometria.Take(8000).ToList();
+                        biometriaList = ctx.tbBiometria_Akiama.Take(8000).ToList();
 
                 }
 
 
                 if (false)
                 {
-                    var tempbiometriaListFaker = new List<tbBiometria>();
+                    var tempbiometriaListFaker = new List<tbBiometria_Akiama>();
                    
                     foreach (var biometria in biometriaList)
                     {
@@ -103,7 +103,7 @@ namespace Matching_cs.Helper
 
                     for (int i = 0; i < 15000; i++)
                     {
-                        var biometria = new tbBiometria
+                        var biometria = new tbBiometria_Akiama
                         {
                             biometriaBytes = tempbiometriaListFaker[i].biometriaBytes
                         };
@@ -129,17 +129,17 @@ namespace Matching_cs.Helper
             return null;
         }
 
-        public static IEnumerable<tbBiometria> FacktoryBiometriaList(IEnumerable<tbBiometria> biometriaList, int countSkip, int countTake, bool skip)
+        public static IEnumerable<tbBiometria_Akiama> FacktoryBiometriaList(IEnumerable<tbBiometria_Akiama> biometriaList, int countSkip, int countTake, bool skip)
         {
             return biometriaList.Skip(countSkip).Take(countTake);
         }
 
-        public static IEnumerable<tbBiometria> FacktoryBiometriaList( int countSkip, int countTake, bool skip)
+        public static IEnumerable<tbBiometria_Akiama> FacktoryBiometriaList( int countSkip, int countTake, bool skip)
         {
-            IEnumerable<tbBiometria> biometriaList;
+            IEnumerable<tbBiometria_Akiama> biometriaList;
             using (var ctx = new FMContext())
             {
-                biometriaList = ctx.tbBiometria.Skip(countSkip).Take(countTake).ToList();
+                biometriaList = ctx.tbBiometria_Akiama.Skip(countSkip).Take(countTake).ToList();
                 ctx.Dispose();
                 
             }
@@ -147,13 +147,13 @@ namespace Matching_cs.Helper
             return biometriaList;
         }
 
-        //public static IEnumerable<tbBiometria> FacktoryBiometriaList(int whereId = 0,  int countSkip = 0, int countTake = 0, bool skip = false)
+        //public static IEnumerable<tbBiometria_Akiama> FacktoryBiometriaList(int whereId = 0,  int countSkip = 0, int countTake = 0, bool skip = false)
         //{
-        //    IEnumerable<tbBiometria> biometriaList;
+        //    IEnumerable<tbBiometria_Akiama> biometriaList;
         //    using (var ctx = new FMContext())
         //    {
         //        if(whereId > 0 )
-        //        biometriaList = ctx.tbBiometria.Find(whereId);
+        //        biometriaList = ctx.tbBiometria_Akiama.Find(whereId);
 
 
         //        ctx.Dispose();
@@ -164,13 +164,13 @@ namespace Matching_cs.Helper
         //}
 
 
-        public static tbBiometria FacktoryBiometriaList(int whereId = 0, int countSkip = 0, int countTake = 0, bool skip = false)
+        public static tbBiometria_Akiama FacktoryBiometriaList(int whereId = 0, int countSkip = 0, int countTake = 0, bool skip = false)
         {
             
             using (var ctx = new FMContext())
             {
                 if (whereId > 0)
-                    biometriaFirst = ctx.tbBiometria.Find(whereId);
+                    biometriaFirst = ctx.tbBiometria_Akiama.Find(whereId);
 
 
                 ctx.Dispose();
@@ -182,27 +182,27 @@ namespace Matching_cs.Helper
 
 
 
-        public static void SaveList(IEnumerable<tbBiometria> biometriaList = null, bool faker = false, bool saveFaker = true)
+        public static void SaveList(IEnumerable<tbBiometria_Akiama> biometriaList = null, int totalFaker = 1000 , bool faker = false, bool saveFaker = false)
         {
             try
             {
-                if (saveFaker)
+                if (!saveFaker)
                     return;
 
                 var biometria = biometriaList.FirstOrDefault();
 
                 if (faker)
                 {
-                    var bometriaFaker = new Faker<tbBiometria>()
+                    var bometriaFaker = new Faker<tbBiometria_Akiama>()
                    .RuleFor(t => t.biometriaBytes, f => biometria.biometriaBytes);
 
-                    biometriaList = bometriaFaker.Generate(7000).ToList();
+                    biometriaList = bometriaFaker.Generate(totalFaker).ToList();
                 }
 
 
                 using (var ctx = new FMContext())
                 {
-                    ctx.tbBiometria.AddRange(biometriaList);
+                    ctx.tbBiometria_Akiama.AddRange(biometriaList);
                     ctx.SaveChanges();
                 }
             }

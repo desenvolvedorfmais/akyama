@@ -180,13 +180,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>FMContext.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Model\tbBiometria.cs">
-      <DependentUpon>FMContext.tt</DependentUpon>
-    </Compile>
     <Compile Include="Domain\Interface\Repository\IBiometriaRepository.cs" />
     <Compile Include="Domain\Interface\Repository\IRepository.cs" />
     <Compile Include="Data\Repository\Repository.cs" />
     <Compile Include="Data\Repository\BiometriaRepository.cs" />
+    <Compile Include="Model\tbBiometria_Akiama.cs">
+      <DependentUpon>FMContext.tt</DependentUpon>
+    </Compile>
     <Content Include="App.ico" />
     <Compile Include="AssemblyInfo.cs">
       <SubType>Code</SubType>

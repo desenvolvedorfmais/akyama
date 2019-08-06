@@ -21,8 +21,8 @@ namespace Matching_cs
     public class MainForm : System.Windows.Forms.Form
     {
         #region Propretiers
-
-        private List<tbBiometria> biometriaList;
+        
+        private List<tbBiometria_Akiama> biometriaList;
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -119,6 +119,8 @@ namespace Matching_cs
         public MainForm()
         {
             InitializeComponent();
+
+
         }
 
         /// <summary>
@@ -1019,12 +1021,36 @@ namespace Matching_cs
 
             var fmContext = new FMContext();
             _biometriaService = new BiometriaService(new BiometriaRepository(fmContext));
-            biometriaList = _biometriaService.GetAll().ToList();
+            biometriaList = _biometriaService.GetAll().Take(3000).ToList();
             if (biometriaList.Count() > 0)
-                FakerHelper.SaveList(biometriaList, false);
+                FakerHelper.SaveList(biometriaList);
+            //FakerHelper.SaveList(biometriaList, 7000, true, true);
 
+            m_FPM.SetLedOn(true);
+            //Cursor.Current = Cursors.WaitCursor;
 
-            Debug.WriteLine($"Count: {biometriaList.Count()}");
+            //int iError;
+            //int timeout;
+            //int quality;
+            //byte[] fp_image;
+            //int elap_time;
+
+            //timeout = Convert.ToInt32(textTimeout.Text);
+            //quality = Convert.ToInt32(textImgQuality.Text);
+            //fp_image = new byte[m_ImageWidth * m_ImageHeight];
+            //elap_time = Environment.TickCount;
+
+            //iError = m_FPM.GetImageEx(fp_image, timeout, this.pictureBox1.Handle.ToInt32(), quality);
+
+            //if (iError == 0)
+            //{
+            //    elap_time = Environment.TickCount - elap_time;
+            //    StatusBar.Text = "Capture Time : " + elap_time + "millisec";
+            //}
+            //else
+            //    DisplayError("GetLiveImageEx()", iError);
+
+            //Cursor.Current = Cursors.Default;
         }
 
         ///////////////////////
@@ -1365,10 +1391,10 @@ namespace Matching_cs
                 {
                     if (matched)
                     {
-                        FakerHelper.SaveList(new List<tbBiometria>
+                        FakerHelper.SaveList(new List<tbBiometria_Akiama>
                         {
-                            new tbBiometria {biometriaBytes = biometriaRegByte}
-                        });
+                            new tbBiometria_Akiama {biometriaBytes = biometriaRegByte}
+                        },  saveFaker: true);
                         StatusBar.Text = "Registration Success, Matching Score: " + match_score;
                     }
                     else
@@ -1400,11 +1426,11 @@ namespace Matching_cs
             {
                  sw = Stopwatch.StartNew();
                 var tasksList = new Task[11];
-                for (int i = 0; i < 11; i++)
+                for (int i = 0; i < tasksList.Length; i++)
                 {
                     if (i == 0)
                         countSkip = 0;
-                    else;
+                    else
                     countSkip += 500;
 
                     if (cancellationTokenSource.IsCancellationRequested)
@@ -1427,7 +1453,7 @@ namespace Matching_cs
                 Parallel.ForEach(tasksList, (t) => { t.Start(); });
                 Task.WaitAll(tasksList);
 
-                
+                Debug.WriteLine(" Finalizado em: " + sw.ElapsedMilliseconds);
                 cancellationTokenSource.Cancel();
             }
             catch (AggregateException ex)
@@ -1497,7 +1523,7 @@ namespace Matching_cs
             return 0;
         }
 
-        private void SearchTemplatesAsync(int idTask, List<tbBiometria> listBiometria, SGFPMSecurityLevel secuLevel,
+        private void SearchTemplatesAsync(int idTask, List<tbBiometria_Akiama> listBiometria, SGFPMSecurityLevel secuLevel,
               CancellationTokenSource cancellationToken)
         {
 
@@ -1511,23 +1537,27 @@ namespace Matching_cs
 
                  iError = m_FPM.MatchTemplate(m_RegMin1, m_VrfMin, secuLevel, ref matched1);
 
-
+                 //Debug.WriteLine($"ID task: {idTask}  ID Biometria: {i.id}");
                 //iError = m_FPM.MatchTemplate(m_RegMin2, m_VrfMin, secu_level, ref matched2);
 
-                if (iError == (int)SGFPMError.ERROR_NONE)
+                if (iError == (int) SGFPMError.ERROR_NONE)
                 {
                     if (matched1)
                     {
-                        Debug.WriteLine($"Achou a biometria na task: {idTask}");
-                        Debug.WriteLine($"Ready ID Biometria: {i.id}");
+                        Debug.WriteLine($"Achou a biometria na task: {idTask}  ID Biometria: {i.id}");
+
                         //StatusBar.Text = "Verification Success";
                         Debug.WriteLine(" Finalizado em: " + sw.ElapsedMilliseconds);
                         cancellationToken.Cancel();
                     }
 
-                   
                 }
-              
+                else
+                {
+                    
+                        DisplayError("GetMatchingScore()", iError);
+                }
+
             });
         }
 
@@ -1745,7 +1775,7 @@ namespace Matching_cs
             }
 
             text = funcName + " Error # " + iError + " :" + text;
-            StatusBar.Text = text;
+            this.Invoke((MethodInvoker) delegate() { StatusBar.Text = text;});
         }
     }
 }

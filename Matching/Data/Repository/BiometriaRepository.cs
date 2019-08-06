@@ -7,7 +7,7 @@ using Matching_cs.Model;
 
 namespace Matching_cs.Data.Repository
 {
-    public class BiometriaRepository : Repository<tbBiometria>, IBiometriaRepository
+    public class BiometriaRepository : Repository<tbBiometria_Akiama>, IBiometriaRepository
     {
         public BiometriaRepository(FMContext dbContext) : base(dbContext)
         {

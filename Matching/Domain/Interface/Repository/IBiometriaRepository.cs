@@ -3,7 +3,7 @@ using Matching_cs.Model;
 
 namespace Matching_cs.Domain.Interface.Repository
 {
-    public interface IBiometriaRepository : IRepository<tbBiometria>, IDisposable
+    public interface IBiometriaRepository : IRepository<tbBiometria_Akiama>, IDisposable
     {
 
     }

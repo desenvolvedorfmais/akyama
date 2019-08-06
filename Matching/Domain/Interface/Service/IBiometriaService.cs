@@ -7,7 +7,7 @@ namespace Matching_cs.Domain.Interface.Service
     public interface IBiometriaService : IDisposable
     {
 
-        IEnumerable<tbBiometria> GetAll();
+        IEnumerable<tbBiometria_Akiama> GetAll();
 
     }
 }

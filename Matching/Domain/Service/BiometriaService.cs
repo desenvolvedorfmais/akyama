@@ -19,7 +19,7 @@ namespace Matching_cs.Domain.Service
             GC.SuppressFinalize(this);
         }
 
-        public IEnumerable<tbBiometria> GetAll()
+        public IEnumerable<tbBiometria_Akiama> GetAll()
         {
             return _biometriaRepository.GetAll();
         }

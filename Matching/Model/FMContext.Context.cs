@@ -13,15 +13,18 @@ namespace Matching_cs.Model
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class FMContext : DbContext, IDisposable
+    public partial class FMContext : DbContext
     {
         public FMContext()
             : base("name=FMContext")
         {
         }
     
-        
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            throw new UnintentionalCodeFirstException();
+        }
     
-        public virtual DbSet<tbBiometria> tbBiometria { get; set; }
+        public virtual DbSet<tbBiometria_Akiama> tbBiometria_Akiama { get; set; }
     }
 }

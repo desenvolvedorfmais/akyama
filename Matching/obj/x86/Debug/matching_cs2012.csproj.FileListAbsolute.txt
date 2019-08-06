@@ -10,20 +10,6 @@ D:\data\www\private\Fazendo Mais\Arquivos\Biometria\Akiama\FDx SDK Pro for Windo
 D:\data\www\private\Fazendo Mais\Arquivos\Biometria\Akiama\FDx SDK Pro for Windows v3.85_J1.12\FDx SDK Pro for Windows v3.85_J1.12\FDx SDK Pro for Windows 3.85\DotNET\Samples\C#\Matching\obj\x86\Debug\Matching_cs.exe
 D:\data\www\private\Fazendo Mais\Arquivos\Biometria\Akiama\FDx SDK Pro for Windows v3.85_J1.12\FDx SDK Pro for Windows v3.85_J1.12\FDx SDK Pro for Windows 3.85\DotNET\Samples\C#\Matching\obj\x86\Debug\Matching_cs.pdb
 D:\data\www\private\Fazendo Mais\private\web-integration\C#\Matching\bin\x86\Debug\Newtonsoft.Json.dll
-D:\data\www\private\Fazendo Mais\private\web-integration\C#\Matching\bin\x86\Debug\Matching_cs.exe.config
-D:\data\www\private\Fazendo Mais\private\web-integration\C#\Matching\bin\x86\Debug\Matching_cs.exe
-D:\data\www\private\Fazendo Mais\private\web-integration\C#\Matching\bin\x86\Debug\Matching_cs.pdb
-D:\data\www\private\Fazendo Mais\private\web-integration\C#\Matching\bin\x86\Debug\EntityFramework.dll
-D:\data\www\private\Fazendo Mais\private\web-integration\C#\Matching\bin\x86\Debug\EntityFramework.SqlServer.dll
-D:\data\www\private\Fazendo Mais\private\web-integration\C#\Matching\bin\x86\Debug\EntityFramework.xml
-D:\data\www\private\Fazendo Mais\private\web-integration\C#\Matching\bin\x86\Debug\EntityFramework.SqlServer.xml
-D:\data\www\private\Fazendo Mais\private\web-integration\C#\Matching\bin\x86\Debug\Newtonsoft.Json.xml
-D:\data\www\private\Fazendo Mais\private\web-integration\C#\Matching\obj\x86\Debug\Matching_cs.MainForm.resources
-D:\data\www\private\Fazendo Mais\private\web-integration\C#\Matching\obj\x86\Debug\matching_cs2012.csproj.GenerateResource.cache
-D:\data\www\private\Fazendo Mais\private\web-integration\C#\Matching\obj\x86\Debug\matching_cs2012.csproj.CoreCompileInputs.cache
-D:\data\www\private\Fazendo Mais\private\web-integration\C#\Matching\obj\x86\Debug\matching_cs2012.csproj.CopyComplete
-D:\data\www\private\Fazendo Mais\private\web-integration\C#\Matching\obj\x86\Debug\Matching_cs.exe
-D:\data\www\private\Fazendo Mais\private\web-integration\C#\Matching\obj\x86\Debug\Matching_cs.pdb
 D:\App\projects\private\fazendomais\private\web-dev\fm-third-dev\akiama\Matching\bin\x86\Debug\Matching_cs.exe.config
 D:\App\projects\private\fazendomais\private\web-dev\fm-third-dev\akiama\Matching\bin\x86\Debug\Matching_cs.exe
 D:\App\projects\private\fazendomais\private\web-dev\fm-third-dev\akiama\Matching\bin\x86\Debug\Matching_cs.pdb
@@ -43,3 +29,21 @@ D:\App\projects\private\fazendomais\private\web-dev\fm-third-dev\akiama\Matching
 D:\App\projects\private\fazendomais\private\web-dev\fm-third-dev\akiama\Matching\obj\x86\Debug\Matching_cs.exe
 D:\App\projects\private\fazendomais\private\web-dev\fm-third-dev\akiama\Matching\obj\x86\Debug\Matching_cs.pdb
 D:\App\projects\private\fazendomais\private\web-dev\fm-third-dev\akiama\Matching\obj\x86\Debug\matching_cs2012.csprojAssemblyReference.cache
+D:\data\www\private\Fazendo Mais\private\web-integration\C#\Matching\bin\x86\Debug\Bogus.dll
+D:\data\www\private\Fazendo Mais\private\web-integration\C#\Matching\bin\x86\Debug\Matching_cs.exe.config
+D:\data\www\private\Fazendo Mais\private\web-integration\C#\Matching\bin\x86\Debug\Matching_cs.exe
+D:\data\www\private\Fazendo Mais\private\web-integration\C#\Matching\bin\x86\Debug\Matching_cs.pdb
+D:\data\www\private\Fazendo Mais\private\web-integration\C#\Matching\bin\x86\Debug\EntityFramework.dll
+D:\data\www\private\Fazendo Mais\private\web-integration\C#\Matching\bin\x86\Debug\EntityFramework.SqlServer.dll
+D:\data\www\private\Fazendo Mais\private\web-integration\C#\Matching\bin\x86\Debug\Bogus.pdb
+D:\data\www\private\Fazendo Mais\private\web-integration\C#\Matching\bin\x86\Debug\Bogus.xml
+D:\data\www\private\Fazendo Mais\private\web-integration\C#\Matching\bin\x86\Debug\EntityFramework.xml
+D:\data\www\private\Fazendo Mais\private\web-integration\C#\Matching\bin\x86\Debug\EntityFramework.SqlServer.xml
+D:\data\www\private\Fazendo Mais\private\web-integration\C#\Matching\bin\x86\Debug\Newtonsoft.Json.xml
+D:\data\www\private\Fazendo Mais\private\web-integration\C#\Matching\obj\x86\Debug\Matching_cs.MainForm.resources
+D:\data\www\private\Fazendo Mais\private\web-integration\C#\Matching\obj\x86\Debug\matching_cs2012.csproj.GenerateResource.cache
+D:\data\www\private\Fazendo Mais\private\web-integration\C#\Matching\obj\x86\Debug\matching_cs2012.csproj.CoreCompileInputs.cache
+D:\data\www\private\Fazendo Mais\private\web-integration\C#\Matching\obj\x86\Debug\matching_cs2012.csproj.CopyComplete
+D:\data\www\private\Fazendo Mais\private\web-integration\C#\Matching\obj\x86\Debug\Matching_cs.exe
+D:\data\www\private\Fazendo Mais\private\web-integration\C#\Matching\obj\x86\Debug\Matching_cs.pdb
+D:\data\www\private\Fazendo Mais\private\web-integration\C#\Matching\obj\x86\Debug\matching_cs2012.csprojAssemblyReference.cache

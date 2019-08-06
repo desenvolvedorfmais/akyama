@@ -5,44 +5,44 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="dbEventos_FMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="tbBiometria">
+        <EntityType Name="tbBiometria_Akiama">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="biometriaBytes" Type="varbinary(max)" />
-          <Property Name="templateImage" Type="varbinary(max)" />
+          <Property Name="biometriaBytes" Type="varbinary" MaxLength="8000" />
+          <Property Name="templateImage" Type="varbinary" MaxLength="8000" />
         </EntityType>
         <EntityContainer Name="dbEventos_FMModelStoreContainer">
-          <EntitySet Name="tbBiometria" EntityType="Self.tbBiometria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbBiometria_Akiama" EntityType="Self.tbBiometria_Akiama" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="dbEventos_FMModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="tbBiometria">
+        <EntityContainer Name="FMContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tbBiometria_Akiama" EntityType="dbEventos_FMModel.tbBiometria_Akiama" />
+        </EntityContainer>
+        <EntityType Name="tbBiometria_Akiama">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="biometriaBytes" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="templateImage" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="biometriaBytes" Type="Binary" MaxLength="8000" FixedLength="false" />
+          <Property Name="templateImage" Type="Binary" MaxLength="8000" FixedLength="false" />
         </EntityType>
-        <EntityContainer Name="FMContext" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="tbBiometria" EntityType="Self.tbBiometria" />
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="dbEventos_FMModelStoreContainer" CdmEntityContainer="FMContext">
-          <EntitySetMapping Name="tbBiometria">
-            <EntityTypeMapping TypeName="dbEventos_FMModel.tbBiometria">
-              <MappingFragment StoreEntitySet="tbBiometria">
+          <EntitySetMapping Name="tbBiometria_Akiama">
+            <EntityTypeMapping TypeName="dbEventos_FMModel.tbBiometria_Akiama">
+              <MappingFragment StoreEntitySet="tbBiometria_Akiama">
                 <ScalarProperty Name="templateImage" ColumnName="templateImage" />
-                <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="biometriaBytes" ColumnName="biometriaBytes" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
